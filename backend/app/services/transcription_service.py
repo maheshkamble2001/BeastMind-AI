@@ -54,7 +54,9 @@ class TranscriptionService:
             segments, info = self._model.transcribe(
                 str(audio_path),
                 language=None if language in (None, "auto") else language,
+                # vad_filter=False,
                 vad_filter=False,
+no_speech_threshold=0.9,   # if you added this per Step 3
             )
             text = " ".join(seg.text.strip() for seg in segments).strip()
             return text, info
